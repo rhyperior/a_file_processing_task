@@ -33,7 +33,7 @@ async def create_new_textfile():
 
 async def move_files(origin_folder, destination_folder):
     try:
-        system(f"MOVE {origin_folder}*txt {destination_folder}")
+        system(f"mv {origin_folder}*txt {destination_folder}")
     except Exception as e:
         print("Exception in move_files_to_queue fn", str(e))
 
