@@ -1,0 +1,9 @@
+#VSCode
+.history/
+venv/
+__pycache__/
+
+*.txt
+
+!problem_statement.txt
+!requirements.txt
