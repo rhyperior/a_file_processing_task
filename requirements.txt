@@ -100,8 +100,8 @@ python-dateutil==2.8.0
 pytoml==0.1.21
 pytools==2020.4
 pytz==2019.1
-pywin32==304
-pywinpty==2.0.7
+#pywin32==304
+#pywinpty==2.0.7
 pyzmq==22.0.2
 qtconsole==5.0.2
 QtPy==1.9.0
