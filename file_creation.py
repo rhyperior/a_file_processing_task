@@ -14,6 +14,7 @@ PROCESSING_FOLDER = cfg.PROCESSING_FOLDER
 PROCESSED_FOLDER = cfg.PROCESSED_FOLDER
 QUEUE_FOLDER = cfg.QUEUE_FOLDER
 
+files_to_process_list = []
 
 async def create_new_textfile(): 
     try:
@@ -76,6 +77,8 @@ def query_builder(filename_list, action='insert'):
 async def process_queued_files():
     try:
         text_files = [f for f in listdir(cfg.QUEUE_FOLDER) if isfile(join(cfg.QUEUE_FOLDER, f)) and '.txt' in f]
+        files_to_process_list.clear()
+        files_to_process_list.extend(text_files[:])
         insert_query = query_builder(text_files)
         # print(insert_query)
         update_file_details_to_db(query=insert_query)
@@ -87,8 +90,7 @@ async def process_queued_files():
 
 async def finish_processing_files():
     try:
-        text_files = [f for f in listdir(cfg.PROCESSED_FOLDER) if isfile(join(cfg.PROCESSED_FOLDER, f)) and '.txt' in f]
-        update_query = query_builder(text_files, action='update')
+        update_query = query_builder(filename_list=files_to_process_list, action='update')
         print(update_query)
         update_file_details_to_db(query=update_query)
         print('finished processing')
